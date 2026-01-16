@@ -713,10 +713,6 @@ const Footer = () => {
 export default function LandingPage() {
   return (
     <div className="min-h-screen">
-      <style>
-        {`
-          @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500;600&display=swap');\n          \n          @font-face {\n            font-family: 'Love';\n            src: url('../assets/fonts/Love-Regular.otf') format('opentype');\n            font-weight: 400;\n            font-style: normal;\n            font-display: swap;\n          }\n        `}
-      </style>
       <HeroSection />
       <IntroSection />
       <HotelHighlights />
