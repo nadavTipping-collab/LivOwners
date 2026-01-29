@@ -48,10 +48,17 @@ const FadeInSection = ({
     </motion.div>
   );
 };
+const driveImg = (id: string, width = 2000) =>
+  `https://lh3.googleusercontent.com/d/${id}=w${width}`;
 
 // Hero Section
 const HeroSection = () => {
   const [textVisible, setTextVisible] = useState(false);
+  
+  // Hero
+const desktopHeroImage = driveImg("12r-i_aCZr4gwMu8hEwwj60Nw1v2nTVr_", 2000);
+
+
 
   useEffect(() => {
     setTimeout(() => setTextVisible(true), 300);
@@ -59,11 +66,19 @@ const HeroSection = () => {
 
   return (
     <div className="relative w-full min-h-[60vh] md:min-h-[70vh] lg:min-h-screen overflow-hidden bg-black">
-      {/* Hero Image */}
+      {/* Mobile Hero Image */}
       <img
         src={heroImage}
         alt="Welcome to Liv"
-        className="absolute inset-0 w-full h-full object-cover object-center"
+        className="absolute inset-0 w-full h-full object-cover object-center lg:hidden"
+        loading="eager"
+      />
+      
+      {/* Desktop Hero Image */}
+      <img
+        src={desktopHeroImage}
+        alt="Welcome to Liv"
+        className="hidden lg:block absolute inset-0 w-full h-full object-cover object-center"
         loading="eager"
       />
 
@@ -384,7 +399,52 @@ const ExperienceSection = () => {
             Discover Larnaca
           </h2>
         </FadeInSection>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <FadeInSection delay={0.2}>
+            <div
+              className="rounded-lg overflow-hidden aspect-video lg:aspect-square relative cursor-pointer"
+              onClick={handleImageClick}
+            >
+              {larnacaImages.map((image, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity:
+                      currentImageIndex === index ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.6 }}
+                  className="absolute inset-0"
+                >
+                  <img
+                    src={image}
+                    alt={`Larnaca ${index + 1}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </motion.div>
+              ))}
+
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
+                {larnacaImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCurrentImageIndex(index);
+                    }}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      currentImageIndex === index
+                        ? "bg-white w-8"
+                        : "bg-white/50"
+                    }`}
+                    aria-label={`Go to image ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </FadeInSection>
+
           <FadeInSection delay={0.3}>
             <div
               className="text-[#3E617F] space-y-6"
@@ -404,7 +464,7 @@ const ExperienceSection = () => {
                 מאפשר לכם להכיר מקרוב את הסביבה והאווירה שבה
                 נמצא הבית שלכם, לפגוש את הצוות שמאחורי המותג
                 ולחוות מקרוב את האווירה המקומית שהופכת את LIV
-                למה שהיא. הסיור משלב תרבות, קולינריה מקומית,
+                למה שיא. הסיור משלב תרבות, קולינריה מקומית,
                 ביקור בפרויקטים של הרשת ומפגש אישי עם הנהלת
                 הרשת.
               </p>
@@ -459,51 +519,6 @@ const ExperienceSection = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               ></a>
-            </div>
-          </FadeInSection>
-
-          <FadeInSection delay={0.2}>
-            <div
-              className="rounded-lg overflow-hidden aspect-video relative cursor-pointer"
-              onClick={handleImageClick}
-            >
-              {larnacaImages.map((image, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0 }}
-                  animate={{
-                    opacity:
-                      currentImageIndex === index ? 1 : 0,
-                  }}
-                  transition={{ duration: 0.6 }}
-                  className="absolute inset-0"
-                >
-                  <img
-                    src={image}
-                    alt={`Larnaca ${index + 1}`}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </motion.div>
-              ))}
-
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
-                {larnacaImages.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setCurrentImageIndex(index);
-                    }}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      currentImageIndex === index
-                        ? "bg-white w-8"
-                        : "bg-white/50"
-                    }`}
-                    aria-label={`Go to image ${index + 1}`}
-                  />
-                ))}
-              </div>
             </div>
           </FadeInSection>
         </div>
@@ -713,6 +728,10 @@ const Footer = () => {
 export default function LandingPage() {
   return (
     <div className="min-h-screen">
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;500;600;700;800&family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500;600&display=swap');\n          \n          @font-face {\n            font-family: 'Love';\n            src: url('https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/love/Love-Regular.ttf') format('truetype');\n            font-weight: 400;\n            font-style: normal;\n            font-display: swap;\n          }\n        `}
+      </style>
       <HeroSection />
       <IntroSection />
       <HotelHighlights />
