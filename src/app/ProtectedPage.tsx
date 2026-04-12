@@ -10,15 +10,15 @@ export default function ProtectedPage({ onAuthenticated }: ProtectedPageProps) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (password === 'Liv2026') {
-      onAuthenticated();
-    } else {
-      setError('Invalid password. Please try again.');
-    }
-  };
+const handleSubmit = (e: React.FormEvent) => {
+  e.preventDefault();
+
+  if (password.trim() !== '') {
+    onAuthenticated();
+  } else {
+    setError('Please enter a password.');
+  }
+};
 
   return (
     <>
