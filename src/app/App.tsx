@@ -1,4 +1,4 @@
-import { useState } from 'react';
+/*import { useState } from 'react';
 import ProtectedPage from './ProtectedPage';
 import LandingPage from './LandingPage';
 
@@ -10,4 +10,10 @@ export default function App() {
   }
 
   return <ProtectedPage onAuthenticated={() => setIsAuthenticated(true)} />;
+}*/
+
+import LandingPage from './LandingPage';
+
+export default function App() {
+  return <LandingPage />;
 }
